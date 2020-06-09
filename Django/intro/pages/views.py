@@ -8,13 +8,13 @@ def index(request):
         'hello': hello,
         'l':lunch
     }
-    return render(request, 'index.html', context)
+    return render(request, 'pages/index.html', context)
 
 def hello(request, name):
     context = {
         'name': name
     }
-    return render(request, 'hello.html', context)
+    return render(request, 'pages/hello.html', context)
 
 
 def times(request, num1, num2):
@@ -24,7 +24,7 @@ def times(request, num1, num2):
         'num2': num2,
         'result': result
     }
-    return render(request, 'times.html', context)
+    return render(request, 'pages/times.html', context)
 
 
 from datetime import datetime
@@ -43,7 +43,7 @@ def dtl(request):
         'empty_list': empty_list,
 
     }
-    return render(request, 'dtl.html', context)
+    return render(request, 'pages/dtl.html', context)
 
 def bday(request):
     # 1. 오늘 날짜 가져오기
@@ -53,4 +53,55 @@ def bday(request):
     context = {
         'result': result
     }
-    return render(request, 'bday.html', context)
+    return render(request, 'pages/bday.html', context)
+
+def throw(request):
+    context = {
+        
+    }
+    return render(request, 'pages/throw.html', context)
+
+def catch(request):
+    # request.GET # => { 'username': 'nwith', 'message': 'hi }
+    username = request.GET.get('username') # => 'nwith'
+    message = request.GET.get('message') # => 'hi'
+    context = {
+        'message': message
+    }
+    return render(request, 'pages/catch.html', context)
+
+def lotto(request):
+    context = {
+  
+    }
+    return render(request, 'pages/lotto.html', context)
+
+import random
+def generate(request):
+    count = request.GET.get('count')
+
+    lotto_numbers = range(1, 46)
+
+    lottos =[]
+    for n in range(count):
+        lotto.append(random.sample(lotto_numbers, 6))
+
+    context = {
+        'lottos':lottos
+    }
+    return render(request, 'pages/generate.html', context)
+
+def user_new(request):
+    context = {
+            
+    }
+    return render(request, 'pages/user_new.html', context)
+
+def user_create(request):
+    username = request.POST.get('username')
+    pw = request.POST.get('pw')
+    context = {
+        'username': username,
+        'pw': pw
+    }
+    return render(request, 'pages/user_create.html', context)
