@@ -8,6 +8,6 @@ urlpatterns = [
     path('create/', views.create), # 게시글 생성!(POST)
     path('detail/<int:pk>/',views.detail),
     path('delete/<int:pk>/', views.delete),
-    path('edit/<int:pk>',views.edit), # 게시글 수정 양식(GET 요청)
-    path('update/<int:pk>',views.update), # 게시글 수정!(POST 요청)
+    path('edit/<int:pk>/',views.edit), # 게시글 수정 양식(GET 요청)
+    path('update/<int:pk>/',views.update), # 게시글 수정!(POST 요청)
 ]

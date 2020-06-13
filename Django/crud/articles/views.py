@@ -54,7 +54,7 @@ def delete(request, pk): # POST
 
     return redirect('/articles/index/')
 
-def edit(request): # GET
+def edit(request, pk): # GET
     # Database 조회( + 저장)
     # 1. 조회
     article = Article.objects.get(pk=pk)
