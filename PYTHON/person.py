@@ -26,3 +26,18 @@ print(seongcheon.name)
 print(seongcheon.age)
 print(Person.nama)
 print(Person.age)
+
+seongcheon.eating()
+
+justin = Person()
+print(justin.name) # => 사람 고유 속성
+justin.name = '재석'
+print(justin.name) # => 재석
+print(seongcheon.name) # => 성천
+
+# DB - Class
+# 테이블 - 클래스
+# 열(column) - 클래스 변수
+# 행(row) - 인스턴스
+# 행이 가지는 값들 - 인스턴스 변수
+# 값들의 조합 or 가공 - 메소드
