@@ -16,7 +16,8 @@ def new(request):
         # 1. 요청에 실려온 data 꺼내오기
         # title = request.POST.get('title')
         # content = request.POST.get('content')
-        form = ArticleForm(request.POST)
+        # image = request.FILES.get('image')
+        form = ArticleForm(request.POST, request.FILES)
 
         # 2-1. data 유효성 검사
         if form.is_valid():
@@ -83,7 +84,7 @@ def edit(request, pk):
     else:
         # 수정 양식 보여주기!
         # 1. form class 초기화(생성)
-        form = CommentForm(instance=)
+        form = ArticleForm(instance=article)
         # (ModelForm) 2. Form에 data 채워 넣기
         # form = ArticleForm(instance=article)
         # # 2. Form에 data 채워 넣기
@@ -102,7 +103,7 @@ def comments_new(request, article_pk): # POST
         # 3. 유효성 검사 시행
         if form.is_valid():            
             # 4. 통과하면 database 저장
-            comment = form.save(commti=False)
+            comment = form.save(commit=False)
             # 4-1. article 정보 주입            
             comment.article_id = article_pk
             comment.save()

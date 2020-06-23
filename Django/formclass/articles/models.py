@@ -1,9 +1,22 @@
 from django.db import models
+from imagekit.models import ProcessedImageField
+from imagekit.processors import Thumbnail
 
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length=10)
     content = models.TextField()
+    # image = models.ImageField(blank=True) # None(null) vs. 0, ''
+    image = ProcessedImageField(
+                        blank=True,
+                        processors=[
+                            Thumbnail(300, 300)
+                        ], # 어떤 가공을 할 지
+                        format='JPEG', # 이미지 포멧(jpg, png)
+                        options={ # 이미지 포멧 관련 옵션
+                            'quality': 90,
+                        }                        
+                    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -47,3 +60,12 @@ class Comment(models.Model):
     # article = comment.article
     # article.title => '안녕'
     # article.content # => '반가워'
+
+# Django Fixtures
+# 1. dumpdata
+# python manage.py dumpdata articles.article --indent=2 > article.json
+# 2. loaddata
+# python manage.py loaddata article.json
+
+# 3. csv to fixtures
+# http://hpy.hk/c2f
