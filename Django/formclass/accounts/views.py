@@ -44,8 +44,9 @@ def login(request):
             user = form.get_user()
             update_session_auth_hash(request, user)
             auth_login(request, user)
-            # 4. 로그인 결과 확인 가능 페이지로 안내
-            return redirect('articles:index')
+            # 4. 로그인 결과 확인 가능 페이지로 안내            
+            return redirect(request.GET.get('next') or 'articles:index')
+
     else:
         # User 로그인 창 보여주기
         form = AuthenticationForm()
