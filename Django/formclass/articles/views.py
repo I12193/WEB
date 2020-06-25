@@ -136,7 +136,7 @@ def comments_delete(request, article_pk, pk): # POST
     # 0. 요청이 POST인지 점검
         # 1. pk를 가지고 삭제하려는 data 꺼내오기
     comment = Comment.objects.get(pk=pk)
-    if request.user != article.user:
+    if request.user != comment.user:
         return redirect('articles:detail', comment.article.pk)
     if request.method == 'POST':
         
@@ -149,7 +149,7 @@ def comments_edit(request, article_pk, pk):
     # Database에서 수정하려는 data 가져오기
     comment = comment.objects.get(pk=pk)
 
-    if request.user != article.user:
+    if request.user != comment.user:
         return redirect('articles:detail', comment.article.pk)
 
     # 0. 요청 종류가 POST인지 GET인지 점검
@@ -172,3 +172,17 @@ def comments_edit(request, article_pk, pk):
         'form': form, 
     }
     return render(request, 'articles/comments_edit.html', context)
+
+
+def like(request, pk):
+    user = request.user
+    article = Article.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        if user in article.like_users.all():
+            article.like_users.remove(user)
+        else:
+            article.like_users.add(user)
+
+
+    return redirect('articles:detail',pk)
